@@ -12,8 +12,6 @@ URL:            http://www.jcraft.com/jzlib/
 Source0:        http://www.jcraft.com/jzlib/jzlib-1.0.5.tar.gz
 Source1:        %{name}_build.xml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
-Distribution:   JPackage
-Vendor:         JPackage Project
 
 BuildArch:      noarch
 BuildRequires:  jpackage-utils >= 0:1.5.31, ant >= 0:1.5.4
@@ -98,6 +96,7 @@ ln -s %{name}-%{version} %{_datadir}/%{name}
 %changelog
 * Fri Mar 18 2005 Andrew Overholt <overholt@redhat.com> 1.0.5-2jpp_1fc
 - Build into Fedora.
+- Remove Distribution and Vendor tags.
 
 * Tue Oct 19 2004 David Walluck <david@jpackage.org> 0:1.0.5-2jpp
 - rebuild with jdk 1.4.2

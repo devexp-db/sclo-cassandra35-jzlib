@@ -2,7 +2,7 @@
 
 Name:           jzlib
 Version:        1.0.5
-Release:        2jpp_1fc
+Release: 2jpp_1fc.1
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -94,6 +94,9 @@ ln -s %{name}-%{version} %{_datadir}/%{name}
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
+- rebuilt
+
 * Fri Mar 18 2005 Andrew Overholt <overholt@redhat.com> 1.0.5-2jpp_1fc
 - Build into Fedora.
 - Remove Distribution and Vendor tags.

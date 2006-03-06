@@ -2,7 +2,7 @@
 
 Name:           jzlib
 Version:        1.0.5
-Release: 2jpp_1fc.1
+Release: 2jpp_2fc
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -26,6 +26,7 @@ The zlib was written by Jean-loup Gailly (compression) and Mark Adler
 %package        javadoc
 Summary:        Javadoc for %{name}
 Group:          Development/Documentation
+Prereq: coreutils
 
 %description    javadoc
 %{summary}.
@@ -33,6 +34,7 @@ Group:          Development/Documentation
 %package        demo
 Summary:        Examples for %{name}
 Group:          Development/Libraries/Java
+Prereq: coreutils
 
 %description    demo
 %{summary}.
@@ -94,6 +96,9 @@ ln -s %{name}-%{version} %{_datadir}/%{name}
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Mon Mar  6 2006 Jeremy Katz <katzj@redhat.com> - 0:1.0.5-2jpp_2fc
+- stop the scriptlet spew
+
 * Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
 - rebuilt
 

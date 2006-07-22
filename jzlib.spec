@@ -2,7 +2,7 @@
 
 Name:           jzlib
 Version:        1.0.5
-Release: 2jpp_3fc
+Release: 2jpp_4fc
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -96,6 +96,9 @@ ln -s %{name}-%{version} %{_datadir}/%{name}
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Sat Jul 22 2006 Jakub Jelinek <jakub@redhat.com> - 0:1.0.5-2jpp_4fc
+- Rebuilt
+
 * Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 0:1.0.5-2jpp_3fc
 - rebuild
 

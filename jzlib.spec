@@ -36,7 +36,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        3jpp_1fc
+Release:        3jpp_2fc
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -161,6 +161,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Sat Jul 22 2006 Vivek Lakshmanan <vivekl@redhat.com> - 0:1.0.7-3jpp_2fc
+- Rebuild.
+
 * Sat Jul 22 2006 Vivek Lakshmanan <vivekl@redhat.com> - 0:1.0.7-3jpp_1fc
 - Merge with latest version from JPP.
 

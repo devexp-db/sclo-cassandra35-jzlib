@@ -36,7 +36,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        3jpp_2fc
+Release:        4jpp.1
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -69,6 +69,9 @@ The zlib was written by Jean-loup Gailly (compression) and Mark Adler
 %package        javadoc
 Summary:        Javadoc for %{name}
 Group:          Development/Documentation
+Requires(post): 	%{__rm}
+Requires(post): 	/bin/ln
+Requires(postun):	%{__rm}
 
 %description    javadoc
 %{summary}.
@@ -76,6 +79,9 @@ Group:          Development/Documentation
 %package        demo
 Summary:        Examples for %{name}
 Group:          Development/Libraries/Java
+Requires(post): 	%{__rm}
+Requires(post): 	/bin/ln
+Requires(postun):	%{__rm}
 
 %description    demo
 %{summary}.
@@ -120,10 +126,19 @@ rm -rf $RPM_BUILD_ROOT
 rm -f %{_javadocdir}/%{name}
 ln -s %{name}-%{version} %{_javadocdir}/%{name}
 
+%postun javadoc
+if [ "$1" = "0" ]; then
+    rm -f %{_javadocdir}/%{name}
+fi
+
 %post demo
 rm -f %{_datadir}/%{name}
 ln -s %{name}-%{version} %{_datadir}/%{name}
 
+%postun demo
+if [ "$1" = "0" ]; then
+    rm -f %{_datadir}/%{name}
+fi
 
 %post
 %if %{gcj_support}
@@ -161,6 +176,10 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Tue Aug 08 2006 Vivek Lakshmanan <vivekl@redhat.com> - 0:1.0.7-4jpp.1
+- Re-sync with latest from JPP.
+- Partially adopt new naming convention.
+
 * Sat Jul 22 2006 Vivek Lakshmanan <vivekl@redhat.com> - 0:1.0.7-3jpp_2fc
 - Rebuild.
 

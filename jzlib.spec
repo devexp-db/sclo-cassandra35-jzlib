@@ -36,7 +36,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        4jpp.1
+Release:        5jpp.1
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -176,6 +176,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0:1.0.7-5jpp.1
+- Autorebuild for GCC 4.3
+
 * Tue Aug 08 2006 Vivek Lakshmanan <vivekl@redhat.com> - 0:1.0.7-4jpp.1
 - Re-sync with latest from JPP.
 - Partially adopt new naming convention.

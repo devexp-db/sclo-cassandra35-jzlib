@@ -36,12 +36,12 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        5jpp.1
+Release:        5jpp.2
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
 Group:          Development/Libraries/Java
-License:        BSD-style
+License:        BSD
 URL:            http://www.jcraft.com/jzlib/
 Source0:        http://www.jcraft.com/jzlib/jzlib-1.0.7.tar.gz
 Source1:        %{name}_build.xml
@@ -176,6 +176,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Thu May 29 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 0:1.0.7-5jpp.2
+- fix license tag
+
 * Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0:1.0.7-5jpp.1
 - Autorebuild for GCC 4.3
 

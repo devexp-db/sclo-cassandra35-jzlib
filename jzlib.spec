@@ -36,7 +36,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        5jpp.2
+Release:        5.3%{?dist}
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -69,9 +69,9 @@ The zlib was written by Jean-loup Gailly (compression) and Mark Adler
 %package        javadoc
 Summary:        Javadoc for %{name}
 Group:          Development/Documentation
-Requires(post): 	%{__rm}
-Requires(post): 	/bin/ln
-Requires(postun):	%{__rm}
+# for /bin/rm and /bin/ln
+Requires(post): 	coreutils
+Requires(postun):	coreutils
 
 %description    javadoc
 %{summary}.
@@ -79,9 +79,9 @@ Requires(postun):	%{__rm}
 %package        demo
 Summary:        Examples for %{name}
 Group:          Development/Libraries/Java
-Requires(post): 	%{__rm}
-Requires(post): 	/bin/ln
-Requires(postun):	%{__rm}
+# for /bin/rm and /bin/ln
+Requires(post): 	coreutils
+Requires(postun):	coreutils
 
 %description    demo
 %{summary}.
@@ -176,6 +176,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Wed Jul  9 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 0:1.0.7-5.3
+- drop repotag
+
 * Thu May 29 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 0:1.0.7-5jpp.2
 - fix license tag
 

@@ -36,7 +36,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        5.3%{?dist}
+Release:        6.3%{?dist}
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -176,6 +176,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.0.7-6.3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Wed Jul  9 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 0:1.0.7-5.3
 - drop repotag
 

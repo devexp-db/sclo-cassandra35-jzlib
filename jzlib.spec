@@ -28,15 +28,11 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-%define _with_gcj_support 1
-
-%define gcj_support %{?_with_gcj_support:1}%{!?_with_gcj_support:%{?_without_gcj_support:0}%{!?_without_gcj_support:%{?_gcj_support:%{_gcj_support}}%{!?_gcj_support:0}}}
-
 %define section   free
 
 Name:           jzlib
 Version:        1.0.7
-Release:        7.3%{?dist}
+Release:        7.4%{?dist}
 Epoch:          0
 Summary:        JZlib re-implementation of zlib in pure Java
 
@@ -47,17 +43,9 @@ Source0:        http://www.jcraft.com/jzlib/jzlib-1.0.7.tar.gz
 Source1:        %{name}_build.xml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
-%if ! %{gcj_support}
 BuildArch:      noarch
-%endif
 BuildRequires:  jpackage-utils >= 0:1.6
 BuildRequires:  ant >= 0:1.6
-
-%if %{gcj_support}
-BuildRequires:		java-gcj-compat-devel
-Requires(post):		java-gcj-compat
-Requires(postun):	java-gcj-compat
-%endif
 
 %description
 The zlib is designed to be a free, general-purpose, legally unencumbered 
@@ -114,13 +102,8 @@ cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_datadir}/%{name} # ghost symlink
 
 
-%if %{gcj_support}
-%{_bindir}/aot-compile-rpm
-%endif
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %post javadoc
 rm -f %{_javadocdir}/%{name}
@@ -140,30 +123,10 @@ if [ "$1" = "0" ]; then
     rm -f %{_datadir}/%{name}
 fi
 
-%post
-%if %{gcj_support}
-if [ -x %{_bindir}/rebuild-gcj-db ]
-then
-  %{_bindir}/rebuild-gcj-db
-fi
-%endif
-
-%postun
-%if %{gcj_support}
-if [ -x %{_bindir}/rebuild-gcj-db ]
-then
-  %{_bindir}/rebuild-gcj-db
-fi
-%endif
-
 %files
 %defattr(0644,root,root,0755)
 %{_javadir}/*.jar
 %doc LICENSE.txt
-
-%if %{gcj_support}
-%attr(-,root,root) %{_libdir}/gcj/%{name}/jzlib-1.0.7.jar.*
-%endif
 
 %files javadoc
 %defattr(0644,root,root,0755)
@@ -176,6 +139,9 @@ fi
 %ghost %doc %{_datadir}/%{name}
 
 %changelog
+* Wed Apr 7 2010 Alexander Kurtakov <akurtako@redhat.com> 0:1.0.7-7.4
+- Drop gcj_support.
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.0.7-7.3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 

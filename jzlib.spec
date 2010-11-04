@@ -28,48 +28,43 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-%define section   free
-
 Name:           jzlib
 Version:        1.0.7
-Release:        7.4%{?dist}
+Release:        8%{?dist}
 Epoch:          0
-Summary:        JZlib re-implementation of zlib in pure Java
+Summary:        Re-implementation of zlib in pure Java
 
-Group:          Development/Libraries/Java
+Group:          Development/Libraries
 License:        BSD
 URL:            http://www.jcraft.com/jzlib/
 Source0:        http://www.jcraft.com/jzlib/jzlib-1.0.7.tar.gz
 Source1:        %{name}_build.xml
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch:      noarch
 BuildRequires:  jpackage-utils >= 0:1.6
 BuildRequires:  ant >= 0:1.6
+Requires:       java
+Requires:       jpackage-utils
 
 %description
 The zlib is designed to be a free, general-purpose, legally unencumbered 
--- that is, not covered by any patents -- lossless data-compression 
+-- that is, not covered by any patents -- loss-less data-compression 
 library for use on virtually any computer hardware and operating system. 
 The zlib was written by Jean-loup Gailly (compression) and Mark Adler 
 (decompression). 
 
 %package        javadoc
 Summary:        Javadoc for %{name}
-Group:          Development/Documentation
-# for /bin/rm and /bin/ln
-Requires(post): 	coreutils
-Requires(postun):	coreutils
+Group:          Documentation
+Requires:       jpackage-utils
 
 %description    javadoc
 %{summary}.
 
 %package        demo
 Summary:        Examples for %{name}
-Group:          Development/Libraries/Java
-# for /bin/rm and /bin/ln
-Requires(post): 	coreutils
-Requires(postun):	coreutils
+Group:          Development/Libraries
+Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description    demo
 %{summary}.
@@ -94,51 +89,37 @@ ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 # javadoc
 install -dm 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -pr javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} 
 
 # examples
 install -dm 755 $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
 cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_datadir}/%{name} # ghost symlink
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_datadir}/%{name} 
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post javadoc
-rm -f %{_javadocdir}/%{name}
-ln -s %{name}-%{version} %{_javadocdir}/%{name}
-
-%postun javadoc
-if [ "$1" = "0" ]; then
-    rm -f %{_javadocdir}/%{name}
-fi
-
-%post demo
-rm -f %{_datadir}/%{name}
-ln -s %{name}-%{version} %{_datadir}/%{name}
-
-%postun demo
-if [ "$1" = "0" ]; then
-    rm -f %{_datadir}/%{name}
-fi
-
 %files
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,-)
 %{_javadir}/*.jar
 %doc LICENSE.txt
 
 %files javadoc
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,-)
 %doc %{_javadocdir}/%{name}-%{version}
-%ghost %doc %{_javadocdir}/%{name}
+%doc %{_javadocdir}/%{name}
+%doc LICENSE.txt
 
 %files demo
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,-)
 %doc %{_datadir}/%{name}-%{version}
-%ghost %doc %{_datadir}/%{name}
+%doc %{_datadir}/%{name}
 
 %changelog
+* Thu Nov 4 2010 Alexander Kurtakov <akurtako@redhat.com> 0:1.0.7-8
+- Fix merge review comments bug#225956.
+
 * Wed Apr 7 2010 Alexander Kurtakov <akurtako@redhat.com> 0:1.0.7-7.4
 - Drop gcj_support.
 

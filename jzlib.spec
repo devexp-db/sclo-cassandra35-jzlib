@@ -30,7 +30,7 @@
 
 Name:           jzlib
 Version:        1.0.7
-Release:        9%{?dist}
+Release:        10%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
@@ -117,6 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.0.7-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.0.7-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 

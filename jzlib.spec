@@ -29,20 +29,20 @@
 #
 
 Name:           jzlib
-Version:        1.0.7
-Release:        10%{?dist}
+Version:        1.1.0
+Release:        1%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
 Group:          Development/Libraries
 License:        BSD
 URL:            http://www.jcraft.com/jzlib/
-Source0:        http://www.jcraft.com/jzlib/jzlib-1.0.7.tar.gz
-Source1:        %{name}_build.xml
+Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  jpackage-utils >= 0:1.6
-BuildRequires:  ant >= 0:1.6
+BuildRequires:  maven
+BuildRequires:  maven-resources-plugin
 Requires:       java
 Requires:       jpackage-utils
 
@@ -71,52 +71,40 @@ Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 
 %prep
-%setup -q -n %{name}-%{version}
-cp %{SOURCE1} build.xml
-mkdir src
-mv com src
+%setup -q
+
 
 %build
-ant dist javadoc 
+mvn-rpmbuild install javadoc:aggregate 
 
 %install
 # jars
-rm -rf $RPM_BUILD_ROOT
-install -Dpm 644 dist/lib/%{name}.jar \
-  $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
+install -Dpm 644 target/%{name}-%{version}.jar \
+  $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 
 # javadoc
-install -dm 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} 
+install -dm 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}
+cp -pr target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 # examples
-install -dm 755 $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
-cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_datadir}/%{name} 
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+install -dm 755 $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %files
-%defattr(-,root,root,-)
 %{_javadir}/*.jar
 %doc LICENSE.txt
 
 %files javadoc
-%defattr(-,root,root,-)
-%doc %{_javadocdir}/%{name}-%{version}
 %doc %{_javadocdir}/%{name}
 %doc LICENSE.txt
 
 %files demo
-%defattr(-,root,root,-)
-%doc %{_datadir}/%{name}-%{version}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Fri Jan 13 2012 Alexander Kurtakov <akurtako@redhat.com> 0:1.1.0-1
+- Update to upstream 1.1.0 release.
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.0.7-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 

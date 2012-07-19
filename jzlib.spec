@@ -30,7 +30,7 @@
 
 Name:           jzlib
 Version:        1.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
@@ -102,6 +102,9 @@ cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.1.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Fri Jan 13 2012 Alexander Kurtakov <akurtako@redhat.com> 0:1.1.0-1
 - Update to upstream 1.1.0 release.
 

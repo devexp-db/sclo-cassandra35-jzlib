@@ -30,7 +30,7 @@
 
 Name:           jzlib
 Version:        1.1.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
@@ -40,7 +40,7 @@ URL:            http://www.jcraft.com/jzlib/
 Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  jpackage-utils >= 0:1.6
+BuildRequires:  jpackage-utils
 BuildRequires:  maven
 BuildRequires:  maven-resources-plugin
 Requires:       java
@@ -90,18 +90,28 @@ cp -pr target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 install -dm 755 $RPM_BUILD_ROOT%{_datadir}/%{name}
 cp -pr example/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 
+# pom
+install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
+install -pm 644 pom.xml $RPM_BUILD_ROOT/%{_mavenpomdir}/JPP-%{name}.pom
+%add_maven_depmap JPP-%{name}.pom %{name}.jar
+
 %files
-%{_javadir}/*.jar
+%{_javadir}/%{name}.jar
+%{_mavenpomdir}/JPP-%{name}.pom
+%{_mavendepmapfragdir}/%{name}
 %doc LICENSE.txt
 
 %files javadoc
-%doc %{_javadocdir}/%{name}
+%{_javadocdir}/%{name}
 %doc LICENSE.txt
 
 %files demo
 %doc %{_datadir}/%{name}
 
 %changelog
+* Tue Oct 23 2012 Mat Booth <fedora@matbooth.co.uk> 0:1.1.0-3
+- Add maven pom and depmap rhbz #806572.
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.1.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 

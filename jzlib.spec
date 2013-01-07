@@ -29,15 +29,15 @@
 #
 
 Name:           jzlib
-Version:        1.1.0
-Release:        3%{?dist}
+Version:        1.1.1
+Release:        1%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
 Group:          Development/Libraries
 License:        BSD
 URL:            http://www.jcraft.com/jzlib/
-Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.tar.gz
+Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.zip
 
 BuildArch:      noarch
 BuildRequires:  jpackage-utils
@@ -109,6 +109,9 @@ install -pm 644 pom.xml $RPM_BUILD_ROOT/%{_mavenpomdir}/JPP-%{name}.pom
 %doc %{_datadir}/%{name}
 
 %changelog
+* Mon Jan 7 2013 Alexander Kurtakov <akurtako@redhat.com> 0:1.1.1-1
+- Update to latest upstream.
+
 * Tue Oct 23 2012 Mat Booth <fedora@matbooth.co.uk> 0:1.1.0-3
 - Add maven pom and depmap rhbz #806572.
 

@@ -30,7 +30,7 @@
 
 Name:           jzlib
 Version:        1.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 
@@ -41,7 +41,7 @@ Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.zip
 
 BuildArch:      noarch
 BuildRequires:  jpackage-utils
-BuildRequires:  maven
+BuildRequires:  maven-local
 BuildRequires:  maven-resources-plugin
 Requires:       java
 Requires:       jpackage-utils
@@ -109,6 +109,10 @@ install -pm 644 pom.xml $RPM_BUILD_ROOT/%{_mavenpomdir}/JPP-%{name}.pom
 %doc %{_datadir}/%{name}
 
 %changelog
+* Wed Feb 06 2013 Java SIG <java-devel@lists.fedoraproject.org> - 0:1.1.1-2
+- Update for https://fedoraproject.org/wiki/Fedora_19_Maven_Rebuild
+- Replace maven BuildRequires with maven-local
+
 * Mon Jan 7 2013 Alexander Kurtakov <akurtako@redhat.com> 0:1.1.1-1
 - Update to latest upstream.
 

@@ -1,12 +1,12 @@
 Name:           jzlib
-Version:        1.1.1
-Release:        4%{?dist}
+Version:        1.1.2
+Release:        1%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 License:        BSD
 URL:            http://www.jcraft.com/jzlib/
 BuildArch:      noarch
-Source0:        http://www.jcraft.com/jzlib/jzlib-%{version}.zip
+Source0:        https://github.com/ymnk/jzlib/archive/%{version}.tar.gz
 
 BuildRequires:  maven-local
 
@@ -54,6 +54,10 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Sun Jul 14 2013 Mat Booth <fedora@matbooth.co.uk> 0:1.1.2-1
+- Update to latest upstream, fixes rhbz #980461
+- Fix bogus date in changelog
+
 * Fri Jun 14 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 0:1.1.1-4
 - Update to current packaging guidelines
 
@@ -135,7 +139,7 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 * Tue Oct 19 2004 David Walluck <david@jpackage.org> 0:1.0.5-1jpp
 - 0.1.5
 
-* Sun Aug 23 2004 Randy Watler <rwatler at finali.com> - 0:1.0.3-2jpp
+* Mon Aug 23 2004 Randy Watler <rwatler at finali.com> - 0:1.0.3-2jpp
 - Rebuild with ant-1.6.2
 
 * Wed Jan 14 2004 Ralph Apel <r.apel@r-apel.de> - 0:1.0.3-1jpp

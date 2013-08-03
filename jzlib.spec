@@ -1,6 +1,6 @@
 Name:           jzlib
 Version:        1.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 License:        BSD
@@ -54,6 +54,9 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.1.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Sun Jul 14 2013 Mat Booth <fedora@matbooth.co.uk> 0:1.1.2-1
 - Update to latest upstream, fixes rhbz #980461
 - Fix bogus date in changelog

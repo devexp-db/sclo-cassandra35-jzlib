@@ -1,6 +1,6 @@
 Name:           jzlib
 Version:        1.1.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 License:        BSD
@@ -54,6 +54,9 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 0:1.1.2-3
+- Use Requires: java-headless rebuild (#1067528)
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:1.1.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 

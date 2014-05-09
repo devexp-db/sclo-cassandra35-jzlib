@@ -1,12 +1,15 @@
 Name:           jzlib
-Version:        1.1.2
-Release:        3%{?dist}
+Version:        1.1.3
+Release:        1%{?dist}
 Epoch:          0
 Summary:        Re-implementation of zlib in pure Java
 License:        BSD
 URL:            http://www.jcraft.com/jzlib/
 BuildArch:      noarch
 Source0:        https://github.com/ymnk/jzlib/archive/%{version}.tar.gz
+
+# This patch is sent upstream: https://github.com/ymnk/jzlib/pull/15
+Patch0:         jzlib-javadoc-fixes.patch
 
 BuildRequires:  maven-local
 
@@ -32,6 +35,8 @@ Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %prep
 %setup -q
+%patch0
+
 %mvn_file : %{name}
 
 %build
@@ -54,6 +59,10 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 %doc %{_datadir}/%{name}
 
 %changelog
+* Fri May 09 2014 Mat Booth <mat.booth@redhat.com> - 0:1.1.3-1
+- Update to latest upstream, fixes rhbz #1079510
+- Add patch for javadoc errors
+
 * Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 0:1.1.2-3
 - Use Requires: java-headless rebuild (#1067528)
 

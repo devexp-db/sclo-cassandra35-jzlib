@@ -1,6 +1,2 @@
-/*.tar.gz
-/jzlib-1*/
-/.project
-/noarch
-/*.src.rpm
-/.build-*.log
+/1.1.3.tar.gz
+/jzlib-1.1.3-*.fc2*.src.rpm

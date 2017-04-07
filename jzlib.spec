@@ -1,17 +1,21 @@
-Name:           jzlib
-Version:        1.1.3
-Release:        5%{?dist}
-Epoch:          0
-Summary:        Re-implementation of zlib in pure Java
-License:        BSD
-URL:            http://www.jcraft.com/jzlib/
-BuildArch:      noarch
-Source0:        https://github.com/ymnk/jzlib/archive/%{version}.tar.gz
+%{?scl:%scl_package jzlib}
+%{!?scl:%global pkg_name %{name}}
+
+Name:		%{?scl_prefix}jzlib
+Version:	1.1.3
+Release:	6%{?dist}
+Epoch:		0
+Summary:	Re-implementation of zlib in pure Java
+License:	BSD
+URL:		http://www.jcraft.com/jzlib/
+BuildArch:	noarch
+Source0:	https://github.com/ymnk/%{pkg_name}/archive/%{version}.tar.gz
 
 # This patch is sent upstream: https://github.com/ymnk/jzlib/pull/15
-Patch0:         jzlib-javadoc-fixes.patch
+Patch0:		%{pkg_name}-javadoc-fixes.patch
 
-BuildRequires:  maven-local
+BuildRequires:	%{?scl_prefix_maven}maven-local
+%{?scl:Requires: %scl_runtime}
 
 %description
 The zlib is designed to be a free, general-purpose, legally unencumbered 
@@ -20,34 +24,40 @@ library for use on virtually any computer hardware and operating system.
 The zlib was written by Jean-loup Gailly (compression) and Mark Adler 
 (decompression). 
 
-%package        javadoc
-Summary:        API documentation for %{name}
+%package javadoc
+Summary:	API documentation for %{name}
 
-%description    javadoc
+%description javadoc
 %{summary}.
 
-%package        demo
-Summary:        Examples for %{name}
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+%package demo
+Summary:	Examples for %{pkg_name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description    demo
+%description demo
 %{summary}.
 
 %prep
-%setup -q
+%setup -q -n %{pkg_name}-%{version}
 %patch0
 
-%mvn_file : %{name}
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
+%mvn_file : %{pkg_name}
+%{?scl:EOF}
 
 %build
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %mvn_build
+%{?scl:EOF}
 
 %install
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %mvn_install
+%{?scl:EOF}
 
 # examples
-install -dm 755 %{buildroot}%{_datadir}/%{name}
-cp -pr example/* %{buildroot}%{_datadir}/%{name}
+install -dm 755 %{buildroot}%{_datadir}/%{pkg_name}
+cp -pr example/* %{buildroot}%{_datadir}/%{pkg_name}
 
 %files -f .mfiles
 %doc LICENSE.txt
@@ -56,9 +66,12 @@ cp -pr example/* %{buildroot}%{_datadir}/%{name}
 %doc LICENSE.txt
 
 %files demo
-%doc %{_datadir}/%{name}
+%doc %{_datadir}/%{pkg_name}
 
 %changelog
+* Fri Apr 07 2017 Tomas Repik <trepik@redhat.com> - 0:1.1.3-6
+- scl conversion
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0:1.1.3-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
